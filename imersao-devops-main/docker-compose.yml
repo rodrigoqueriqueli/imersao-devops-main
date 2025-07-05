@@ -1,0 +1,18 @@
+services:
+  api:
+    # Constrói a imagem a partir do Dockerfile no diretório atual.
+    build: .
+    container_name: gestao-escolar-api
+
+    # Mapeia a porta 8000 do contêiner para a porta 8000 da sua máquina.
+    ports:
+      - "8000:8000"
+
+    # Monta o diretório atual no diretório /app do contêiner.
+    # Isso é essencial para duas coisas:
+    # 1. O --reload do uvicorn funcionar: as alterações no seu código local
+    #    serão refletidas instantaneamente dentro do contêiner.
+    # 2. Persistência de dados: O arquivo do banco de dados (escola.db)
+    #    será criado e salvo no seu diretório local.
+    volumes:
+      - .:/app
